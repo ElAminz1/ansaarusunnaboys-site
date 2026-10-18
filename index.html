@@ -106,6 +106,25 @@ footer strong{font-family:Amiri,Georgia,serif;font-size:1.3rem;color:#fff}
 .arab span{display:block;font-family:Amiri,"Noto Naskh Arabic",serif;font-size:2.4rem;line-height:1.3;color:var(--goldtxt);margin-bottom:4px}
 .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .pills span{padding:8px 18px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);font-weight:600}
+header .wrap{max-width:1320px}
+.brand{font-size:1.15rem}.logo{height:42px}
+nav a{padding:8px 9px;font-size:.92rem}nav a.cta{padding:8px 16px;margin-left:6px}
+@media (max-width:1260px){header .wrap{flex-direction:column;align-items:stretch;gap:0;padding-bottom:6px}nav{margin-left:0}.brand{padding-top:10px}}
+footer .legal{border-top:1px solid rgba(255,255,255,.18);margin-top:28px;padding-top:18px;font-size:.9rem;grid-template-columns:1fr auto;gap:8px 24px}footer .legal p{margin:0}footer .legal strong{font-family:inherit;font-size:inherit;color:#fff}@media (max-width:640px){footer .legal{grid-template-columns:1fr}}
+
+.feebox{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;margin-top:32px;padding:26px 28px;border-radius:20px;background:linear-gradient(160deg,var(--green),var(--green2));color:var(--onGreen);border:2px solid var(--gold)}
+.feebox h3{color:#fff;margin:0 0 .2em}.feebox p{margin:0;color:#cfdcd3;max-width:46ch}
+.btn.wa{background:#25d366;border-color:#25d366;color:#06220f;display:inline-flex;align-items:center;gap:10px}
+.sub{margin-top:44px}
+.steps{list-style:none;counter-reset:s;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.steps li{counter-increment:s;position:relative;padding:18px 20px 18px 68px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.steps li::before{content:counter(s);position:absolute;left:18px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--gold);color:#1a1405;font:700 1.3rem Amiri,Georgia,serif;display:grid;place-items:center}
+ul.docs{margin-top:18px}
+.dl{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.btn.dkb{color:var(--ink)}
+.wafab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:10px;padding:13px 20px 13px 16px;border-radius:999px;background:#25d366;color:#06220f;font-weight:700;text-decoration:none;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.wafab:hover{filter:brightness(1.08)}
+@media (max-width:520px){.wafab span{display:none}.wafab{padding:14px}}
 </style>
 </head>
 <body>
@@ -113,7 +132,7 @@ footer strong{font-family:Amiri,Georgia,serif;font-size:1.3rem;color:#fff}
 <div class="wrap">
 <a class="brand" href="#home"><img class="logo" src="logo.png" alt="Ansaaru Sunna Academy logo"><span>Ansaaru Sunna Academy</span></a>
 <nav aria-label="Main">
-<a href="#about">About</a><a href="#islamic">Islamic Studies</a><a href="#academics">Academics</a><a href="#admissions">Admissions</a><a href="#boarding">Boarding</a><a href="#news">News</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a class="cta" href="#admissions">Apply now</a>
+<a href="#about">About</a><a href="#islamic">Islamic Studies</a><a href="#academics">Academics</a><a href="#admissions">Admissions</a><a href="#boarding">Boarding</a><a href="#news">News</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a class="cta" href="#admissions">Apply</a>
 </nav>
 </div>
 </header>
@@ -184,13 +203,44 @@ footer strong{font-family:Amiri,Georgia,serif;font-size:1.3rem;color:#fff}
 <h2>Give your son a strong foundation.</h2>
 <p class="lead">Admissions are open for these classes:</p>
 <ul class="classes">
-<li><strong>Acceleration / Coaching</strong><span>Intensive catch-up programme</span></li>
-<li><strong>Upper Primary</strong><span>Grade 4 – Grade 6</span></li>
-<li><strong>Junior School</strong><span>Grade 7 – Grade 9</span></li>
-<li><strong>Cambridge</strong><span>Year 7 – Year 8</span></li>
-<li><strong>Pearson Edexcel</strong><span>Year 9 – Year 11</span></li>
-<li><strong>8-4-4</strong><span>Form 3</span></li>
+<li><strong>Acceleration</strong><span>Intensive catch-up programme</span></li>
+<li><strong>Grade 5 – Grade 11</strong><span>CBC</span></li>
+<li><strong>Year 7 – Year 10</strong><span>Cambridge &amp; Pearson Edexcel</span></li>
+<li><strong>Form 3</strong><span>8-4-4</span></li>
 </ul>
+<div class="feebox">
+<div><h3>Fee structure</h3><p>Fees are shared directly by the school. Message us on WhatsApp and we will send the current fee structure for your son's class.</p></div>
+<a class="btn wa" href="https://wa.me/254724679235?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20the%20fee%20structure%20and%20admission%20at%20Ansaaru%20Sunna%20Academy%20%E2%80%93%20Boys%20Boarding." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.3 4 14.9c0 2.3.7 4.5 1.9 6.3L4 29l8-2.1c1.7.9 3.9 1.4 4 1.4 6.6 0 12-5.3 12-11.9S22.600 3 16 3zm6.900 16.700c-.3.8-1.700 1.500-2.300 1.600-.6.100-1.300.1-2.100-.1-.5-.2-1.100-.4-1.900-.7-3.300-1.400-5.400-4.700-5.600-4.900-.2-.2-1.300-1.700-1.300-3.200s.8-2.300 1.100-2.600c.3-.3.600-.4.800-.4h.6c.2 0 .5-.1.700.5.300.600.900 2.100 1 2.300.1.200.1.400 0 .600-.1.200-.2.400-.4.600l-.5.600c-.2.200-.4.400-.2.800.2.400.9 1.500 2 2.400 1.400 1.200 2.500 1.500 2.900 1.700.4.200.6.100.8-.1.200-.3 1-1.100 1.200-1.500.3-.4.500-.3.900-.2.400.1 2.400 1.100 2.800 1.300.4.200.7.300.8.500.1.100.1.800-.2 1.600z"/></svg>Ask about fees on WhatsApp</a>
+</div>
+
+<h3 class="sub">How to apply</h3>
+<ol class="steps">
+<li><strong>Enquire.</strong> WhatsApp or call 0724 679 235 for the fee structure and available places.</li>
+<li><strong>Get the forms.</strong> Download the admission form and the student medical form below, or collect them from the school.</li>
+<li><strong>Medical examination.</strong> A licensed medical doctor completes the student medical form.</li>
+<li><strong>Submit.</strong> Return the signed admission form with the documents listed below.</li>
+<li><strong>Pay fees through the bank.</strong> Submit the original bank receipt to the school finance office. Personal cheques are not accepted.</li>
+<li><strong>Report to school.</strong> Come with the uniform, stationery and boarding items on the requirements list, all labelled with your son's name.</li>
+</ol>
+
+<h3 class="sub">Documents needed</h3>
+<ul class="ticks docs">
+<li>Birth certificate or valid passport bio page</li>
+<li>Most recent academic report, or KCPE / IGCSE / CBC results</li>
+<li>Two recent passport-size photographs</li>
+<li>Parent or guardian National ID or passport</li>
+<li>Medical or insurance card (if available)</li>
+<li>Transfer letter (if joining from another school)</li>
+<li>Proof of guardianship if the parent is overseas</li>
+</ul>
+
+<h3 class="sub">Download the forms</h3>
+<div class="dl">
+<a class="btn gold" href="ASA-Admission-Form.pdf" download>Admission form (PDF)</a>
+<a class="btn dkb" href="ASA-Medical-Form.pdf" download>Student medical form (PDF)</a>
+<a class="btn dkb" href="ASA-Boarding-Requirements.pdf" download>Uniform &amp; boarding requirements (PDF)</a>
+</div>
+
 <div class="note"><strong>Visit us for admissions:</strong> Boqol Soon Academy, along Muratina Road, Nairobi. You can also call, WhatsApp or email the school below.</div>
 </div>
 </section>
@@ -256,8 +306,10 @@ footer strong{font-family:Amiri,Georgia,serif;font-size:1.3rem;color:#fff}
 <a class="btn" href="https://wa.me/254726850458">WhatsApp 0726 850 458</a>
 <a class="btn" href="https://wa.me/254724425655">WhatsApp 0724 425 655</a>
 <a class="btn" href="mailto:ansaarusunnaboys@gmail.com">Email the school</a>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=-1.7448774,37.1359419&amp;query_place_id=ChIJuzU4X871LxgRJSaaFWhmhsE" target="_blank" rel="noopener">Get directions to the school</a>
 </div>
 <dl>
+<dt>School location</dt><dd>Behind Konza City, Kenya</dd>
 <dt>Admissions location</dt><dd>Boqol Soon Academy, along Muratina Road, Nairobi</dd>
 <dt>Email</dt><dd>ansaarusunnaboys@gmail.com</dd>
 </dl>
@@ -271,6 +323,8 @@ footer strong{font-family:Amiri,Georgia,serif;font-size:1.3rem;color:#fff}
 <div><p><strong>Explore</strong></p><a href="#academics">Academics</a><a href="#boarding">Boarding life</a><a href="#gallery">Gallery</a><a href="#admissions">Admissions</a></div>
 <div><p><strong>Connect</strong></p><a href="#contact">Contact the school</a><a href="#news">News &amp; announcements</a></div>
 </div>
+<div class="wrap legal"><p>© 2026 Ansaaru Sunna Academy – Boys Boarding. All rights reserved.</p></div>
 </footer>
+<a class="wafab" href="https://wa.me/254724679235?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20the%20fee%20structure%20and%20admission%20at%20Ansaaru%20Sunna%20Academy%20%E2%80%93%20Boys%20Boarding." target="_blank" rel="noopener" aria-label="WhatsApp the school about fees"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.3 4 14.9c0 2.3.7 4.5 1.9 6.3L4 29l8-2.1c1.7.9 3.9 1.4 4 1.4 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm6.9 16.7c-.3.8-1.7 1.5-2.3 1.6-.6.1-1.3.1-2.1-.1-.5-.2-1.1-.4-1.9-.7-3.300-1.400-5.400-4.700-5.600-4.900-.2-.2-1.300-1.700-1.300-3.200s.8-2.300 1.100-2.600c.3-.3.600-.4.800-.4h.6c.2 0 .5-.1.700.5.300.6.900 2.100 1 2.300.1.200.1.400 0 .6-.1.200-.2.400-.4.600l-.5.600c-.2.200-.4.400-.2.800.2.400.9 1.500 2 2.400 1.400 1.200 2.500 1.500 2.900 1.700.4.200.6.100.8-.1.200-.3 1-1.100 1.200-1.500.3-.4.500-.3.900-.2.400.1 2.400 1.100 2.800 1.300.4.200.7.300.8.500.1.100.1.800-.2 1.600z"/></svg><span>Fees? WhatsApp us</span></a>
 </body>
 </html>
