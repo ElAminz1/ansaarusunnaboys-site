@@ -1,0 +1,133 @@
+<title>A Day at Ansaaru Sunna</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Concept: one dial stays fixed at the centre of the screen while a single day (Fajr to lights out) scrolls past it. A thin gold thread grows down the middle as you scroll. The page is one committed night-to-night look. */
+:root{
+  --ink:#06140f; --panel:#0c2118; --line:#1f4a39; --paper:#f3efe2; --muted:#a9bdb2; --gold:#e0ad3c; --sky:#0b2a21;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif; --body:'Public Sans','Segoe UI',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --arabic:'Amiri','Traditional Arabic',serif;
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:1.05rem;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.thread{position:fixed;left:50%;top:0;width:4px;height:100vh;margin-left:-2px;background:var(--gold);transform-origin:top;transform:scaleY(0);z-index:0;opacity:.85}
+.dial{position:fixed;left:50%;top:50%;width:min(320px,40vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:1;pointer-events:none}
+.dial svg{width:100%;height:100%;display:block;overflow:visible}
+.dial .disc{fill:var(--sky)}
+.dial .ring{fill:none;stroke:var(--line);stroke-width:1.2}
+.dial .tick{stroke:var(--muted);stroke-width:1}.dial .tick.big{stroke:var(--paper);stroke-width:1.6}
+.dial .hand{stroke:var(--gold);stroke-width:2.4;stroke-linecap:round}
+.dial .sun{fill:var(--gold)}
+.dial .t{font-family:var(--mono);font-weight:500;fill:var(--paper);text-anchor:middle}
+.dial .l{font-family:var(--body);font-weight:600;fill:var(--paper);text-anchor:middle;font-size:7px;letter-spacing:.14em;text-transform:uppercase}
+main{position:relative;z-index:2;max-width:1200px;margin:0 auto}
+.step{min-height:88vh;display:flex;align-items:center;padding-block:6vh}
+.step:nth-child(odd){justify-content:flex-start}.step:nth-child(even){justify-content:flex-end}
+.card{width:min(34%,420px);min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:1.4rem 1.5rem 1.5rem;transition:opacity .2s}
+.data{font-family:var(--mono);font-size:.82rem;letter-spacing:.04em;color:var(--gold);margin:0 0 .6rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.08;margin:0 0 .6rem;text-wrap:balance;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);max-width:42ch}
+.hero .card{width:min(32%,420px)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,4.2vw,3.6rem);line-height:.98;letter-spacing:-.025em;margin:0 0 1rem;text-wrap:balance}
+.bism{font-family:var(--arabic);font-size:1.7rem;color:var(--gold);margin:0 0 .6rem;direction:rtl;text-align:right}
+.hero .scroll{margin-top:1.2rem;font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.end .card{width:min(34%,440px)}
+.end a.go{display:inline-block;margin-top:1rem;background:var(--gold);color:#1a1405;font-weight:700;text-decoration:none;padding:.8rem 1.4rem;border-radius:999px}
+.end a.go:focus-visible,.end a.go:hover{outline:3px solid var(--paper);outline-offset:3px}
+.end .contact{margin-top:1rem;font-family:var(--mono);font-size:.9rem;color:var(--paper);user-select:all;word-break:break-word}
+footer{position:relative;z-index:2;text-align:center;padding:2rem 0 4rem;color:var(--muted);font-size:.8rem;max-width:60ch;margin:0 auto}
+@media (max-width:980px){
+  .dial{top:calc(12px + env(safe-area-inset-top,0px));width:132px;transform:translateX(-50%)}
+  main{padding-top:150px}
+  .step,.step:nth-child(even),.step:nth-child(odd){min-height:70vh;justify-content:center}
+  .card,.hero .card,.end .card{width:100%}
+  .thread{opacity:.5}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+</style>
+
+<div class="thread" id="thread" aria-hidden="true"></div>
+<div class="dial" aria-hidden="true">
+  <svg viewBox="-100 -100 200 200">
+    <circle class="ring" r="96"></circle>
+    <g id="ticks"></g>
+    <circle class="disc" id="disc" r="70"></circle>
+    <line class="hand" id="hand" x1="0" y1="0" x2="0" y2="-62"></line>
+    <circle class="sun" id="sun" r="5.5" cx="0" cy="-88"></circle>
+    <text class="t" id="clock" y="6" font-size="22">04:45</text>
+    <text class="l" id="lab" y="24">Wake up</text>
+  </svg>
+</div>
+
+<main id="steps">
+  <section class="step hero" data-t="285" data-label="Wake up">
+    <div class="card">
+      <p class="bism" lang="ar">بسم الله الرحمن الرحيم</p>
+      <h1>A day at Ansaaru Sunna</h1>
+      <p>Follow one boy from the first call to Fajr to lights out. Academics, Madarasa and prayer share the same day, in this order.</p>
+      <p class="scroll">Scroll to begin</p>
+    </div>
+  </section>
+  <section class="step" data-t="300" data-label="Fajr">
+    <div class="card"><p class="data"><span>05:00</span><span>Fajr in congregation</span></p><h2>The day starts with prayer</h2><p>The boys wake before sunrise, make wudhu and pray Fajr together. The morning adhkar follow before anyone opens a book.</p></div>
+  </section>
+  <section class="step" data-t="375" data-label="Qur'an">
+    <div class="card"><p class="data"><span>06:15</span><span>Qur'an halaqa</span></p><h2>Qur'an and Hadith, in small groups</h2><p>Each boy recites to his halaqa teacher, who records where he is. The progress is kept on the school portal for his parents.</p></div>
+  </section>
+  <section class="step" data-t="450" data-label="Breakfast">
+    <div class="card"><p class="data"><span>07:30</span><span>Breakfast</span></p><h2>Breakfast, then assembly</h2><p>A hot meal in the dining hall, then the whole school gathers for assembly and the day's announcements.</p></div>
+  </section>
+  <section class="step" data-t="510" data-label="Lessons">
+    <div class="card"><p class="data"><span>08:30</span><span>CBC</span><span>8-4-4</span><span>IGCSE</span></p><h2>Lessons in three curricula</h2><p>CBC from Grade 5 to Grade 11, 8-4-4 in Form 3, and IGCSE from Year 7 to Year 10 with Cambridge and Edexcel. Every class has its own timetable and subject teachers.</p></div>
+  </section>
+  <section class="step" data-t="780" data-label="Dhuhr">
+    <div class="card"><p class="data"><span>13:00</span><span>Dhuhr and lunch</span></p><h2>Pause, pray, eat</h2><p>The boys pray Dhuhr in congregation and have lunch. The afternoon is Madarasa time: Arabic, Fiqh, Tawheed and Sirah.</p></div>
+  </section>
+  <section class="step" data-t="930" data-label="Asr and games">
+    <div class="card"><p class="data"><span>15:30</span><span>Asr</span><span>Games</span></p><h2>Asr, then out in the field</h2><p>After Asr the boys play football and other sports, or join their clubs and contests. A tired boy studies better.</p></div>
+  </section>
+  <section class="step" data-t="1110" data-label="Maghrib">
+    <div class="card"><p class="data"><span>18:30</span><span>Maghrib and dinner</span></p><h2>Maghrib, then dinner</h2><p>Prayer first, then dinner together. The boarding staff take attendance and check that every boy is present.</p></div>
+  </section>
+  <section class="step" data-t="1230" data-label="Prep">
+    <div class="card"><p class="data"><span>20:30</span><span>Evening prep</span></p><h2>Supervised study</h2><p>After Isha the boys do their prep in the classrooms with a teacher present, and revise what they covered that day.</p></div>
+  </section>
+  <section class="step" data-t="1320" data-label="Lights out">
+    <div class="card"><p class="data"><span>22:00</span><span>Lights out</span></p><h2>Lights out, ready for Fajr</h2><p>Dormitories are quiet, and the boys sleep early. Tomorrow starts again at the call to prayer.</p></div>
+  </section>
+  <section class="step end" data-t="1320" data-label="Join us">
+    <div class="card"><p class="data"><span>January 2027 intake</span></p><h2>Give your son this day</h2><p>Apply online, get your registration number, book an interview and receive the offer letter, all from one page.</p><a class="go" href="https://portal.ansaarusunnaboys.co.ke/apply.php">Apply online</a><p class="contact">portal.ansaarusunnaboys.co.ke/apply.php<br>Call or WhatsApp 0724 679 235</p></div>
+  </section>
+</main>
+<footer>The times on this page show a typical day and may change from term to term. Confirm the current timetable with the school.</footer>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg', ticks=document.getElementById('ticks');
+  for(var h=0;h<24;h++){var a=h/24*2*Math.PI, big=h%6===0, r1=big?80:84, r2=90;
+    var l=document.createElementNS(NS,'line'); l.setAttribute('class','tick'+(big?' big':''));
+    l.setAttribute('x1',(Math.sin(a)*r1).toFixed(2)); l.setAttribute('y1',(-Math.cos(a)*r1).toFixed(2)); l.setAttribute('x2',(Math.sin(a)*r2).toFixed(2)); l.setAttribute('y2',(-Math.cos(a)*r2).toFixed(2)); ticks.appendChild(l);}
+  var steps=[].slice.call(document.querySelectorAll('.step')), thread=document.getElementById('thread'), hand=document.getElementById('hand'), sun=document.getElementById('sun'), clock=document.getElementById('clock'), lab=document.getElementById('lab'), disc=document.getElementById('disc');
+  var sky=[[0,[8,22,40]],[270,[16,40,70]],[300,[44,62,110]],[345,[214,122,86]],[420,[96,162,200]],[720,[120,190,224]],[1020,[226,144,70]],[1110,[70,48,86]],[1200,[12,26,48]],[1440,[8,22,40]]];
+  function skyAt(t){for(var i=0;i<sky.length-1;i++){var a=sky[i],b=sky[i+1];if(t>=a[0]&&t<=b[0]){var f=(t-a[0])/(b[0]-a[0]);return a[1].map(function(v,k){return Math.round(v+(b[1][k]-v)*f)});}}return sky[0][1];}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches, tick=false;
+  function pad(n){return n<10?'0'+n:''+n}
+  function update(){
+    tick=false; var vh=window.innerHeight, mid=vh*0.5, de=document.documentElement;
+    var max=Math.max(1,de.scrollHeight-vh), p=Math.min(1,Math.max(0,window.scrollY/max));
+    thread.style.transform='scaleY('+p.toFixed(4)+')';
+    var cs=steps.map(function(s){var r=s.getBoundingClientRect();return r.top+r.height/2}), t=+steps[0].dataset.t, cur=0;
+    for(var i=0;i<steps.length;i++){ if(cs[i]<=mid) cur=i; }
+    if(mid<=cs[0]){t=+steps[0].dataset.t;cur=0;}
+    else if(cur>=steps.length-1){t=+steps[steps.length-1].dataset.t;}
+    else {var f=(mid-cs[cur])/(cs[cur+1]-cs[cur]); f=Math.min(1,Math.max(0,f)); t=+steps[cur].dataset.t+f*(+steps[cur+1].dataset.t-+steps[cur].dataset.t); if(f>.5)cur=cur+1;}
+    var ang=t/1440*360, rad=ang*Math.PI/180;
+    hand.setAttribute('transform','rotate('+ang.toFixed(1)+')'); sun.setAttribute('cx',(Math.sin(rad)*88).toFixed(2)); sun.setAttribute('cy',(-Math.cos(rad)*88).toFixed(2));
+    var m=Math.round(t); clock.textContent=pad(Math.floor(m/60)%24)+':'+pad(m%60); lab.textContent=steps[cur].dataset.label;
+    var c=skyAt(t); disc.style.fill='rgb('+c.join(',')+')';
+    if(!reduce) steps.forEach(function(s,i){var d=Math.abs(cs[i]-mid)/(vh*0.65); s.firstElementChild.style.opacity=Math.max(.35,Math.min(1,1.6-1.2*d)).toFixed(2);});
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(update);}}
+  window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req); update();
+})();
+</script>
