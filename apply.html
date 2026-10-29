@@ -238,6 +238,21 @@ button.btn:disabled{opacity:.6;cursor:wait}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .msg.ok{background:#14301d;color:#cfeedb}:root:not([data-theme="light"]) .msg.err{background:#3a1613;color:#f6d3cf}}
 .sidehelp{margin-top:28px;color:var(--muted)}
 footer .legal .powered a{display:inline;padding:0;color:inherit;text-decoration:underline;text-underline-offset:3px}footer .legal .powered a:hover{color:#fff}
+
+/* phone sizing */
+html{-webkit-text-size-adjust:100%}body{overflow-x:hidden}
+@media (max-width:640px){
+ body{font-size:15.5px}
+ .wrap{padding-inline:16px}
+ .brand{font-size:.98rem;gap:8px;white-space:normal;min-width:0;line-height:1.15}.logo{height:34px;flex:none}
+ .hero h1{font-size:clamp(2rem,9vw,2.6rem);max-width:none}
+ .pagehero h1{font-size:clamp(1.7rem,8vw,2.2rem)}
+ .hero p,.pagehero p{font-size:1rem}
+ h2{font-size:clamp(1.45rem,6.5vw,1.9rem)}
+ .btn,.cta,a.btn{padding:11px 18px;font-size:.95rem}
+ section{padding-block:36px}
+ img,video,iframe,table{max-width:100%}
+}
 </style>
 </head>
 <body>
